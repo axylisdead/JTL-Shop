@@ -1,0 +1,34 @@
+{
+    "name"        : "jtlshop/semver",
+    "description" : "A decent, standards-compliant, Semantic Versioning (SemVer) parser and library",
+    "keywords"    : ["semver", "semantic", "versioning"],
+    "homepage"    : "https://gitlab.jtl-software.de/jtlshop/semver",
+    "time"        : "2023-05-16",
+    "type"        : "library",
+    "license"     : "MIT",
+    "version"     : "2.0.0",
+    "authors": [
+        {
+            "name"     : "Maurice Fonk",
+            "email"    : "maurice@naneau.net",
+            "homepage" : "http://mauricefonk.com",
+            "role"     : "developer"
+        },
+        {
+            "name"     : "JTL-Software-GmbH",
+            "email"    : "teamshop@jtl-software.com",
+            "role"     : "developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "JTLShop\\SemVer\\": "src"
+        }
+    }
+}

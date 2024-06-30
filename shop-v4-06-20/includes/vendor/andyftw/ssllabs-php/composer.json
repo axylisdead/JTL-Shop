@@ -1,0 +1,27 @@
+{
+    "name": "andyftw/ssllabs-php",
+    "description": "SSL Labs API PHP-Port",
+    "homepage": "https://github.com/andyftw/ssllabs-php",
+    "keywords": ["ssllabs"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy",
+            "email": "info@andyfront.de",
+            "homepage": "https://andyfront.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "jms/serializer": "^0.16.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": { "Andyftw\\SSLLabs\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Andyftw\\SSLLabs\\Test\\": "tests" }
+    }
+}

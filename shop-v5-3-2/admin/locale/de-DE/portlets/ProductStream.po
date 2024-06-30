@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Product Stream"
+msgstr "Product-Stream"
+
+msgid "presentation"
+msgstr "Darstellung"
+
+msgid "presentationGallery"
+msgstr "Galerie"
+
+msgid "presentationList"
+msgstr "Liste"
+
+msgid "presentationSimpleSlider"
+msgstr "Einfacher Slider mit Bildern"
+
+msgid "presentationSlider"
+msgstr "Slider mit Namen und Preisen"
+
+msgid "presentationBoxSlider"
+msgstr "Einzelprodukt-Slider mit Name und Preis"
+
+msgid "itemFilter"
+msgstr "Artikelfilter"
+
+msgid "maxProducts"
+msgstr "Max. Artikel"
+
+msgid "maxProductsDesc"
+msgstr "Begrenzen der Artikel-Anzahl auf..."
+
+msgid "productSource"
+msgstr "Artikel-Auswahl"
+
+msgid "productSourceFiltering"
+msgstr "Filterung"
+
+msgid "productSourceExplicit"
+msgstr "Explizite Auswahl"
+
+msgid "searchFilters"
+msgstr "Filter suchen"
+
+msgid "displayCountDesc"
+msgstr "Responsive Anzeige: Hier können Sie festlegen, wie viele Artikel gleichzeitig im Slider zu sehen sind abhängig "
+"von der Viewport-Größe des Endgerätes (SM: klein, MD: normal, LG: groß, XL: sehr groß)"
+
+msgid "displayCountSM"
+msgstr "Anzahl bei SM"
+
+msgid "displayCountMD"
+msgstr "Anzahl bei MD"
+
+msgid "displayCountLG"
+msgstr "Anzahl bei LG"
+
+msgid "displayCountXL"
+msgstr "Anzahl bei XL"

@@ -1,0 +1,22 @@
+{
+  "name": "jtlshop/sccbs3",
+  "description": "Bootstrap3 renderer for Smarty component collection",
+  "homepage": "https://www.jtl-software.de/",
+  "keywords": ["jtl-shop"],
+  "license": "MIT",
+  "version": "1.0.1",
+  "authors": [
+    {
+      "name": "Felix Moche",
+      "email": "felix.moche@jtl-software.com",
+      "homepage": "https://www.jtl-software.de/"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "jtlshop/scc": "1.*"
+  },
+  "autoload": {
+    "psr-4": { "sccbs3\\": "src/sccbs3" }
+  }
+}

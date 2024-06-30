@@ -1,0 +1,24 @@
+{
+    "name": "jtlshop/shop5-systemcheck",
+    "description": "Shop5 Systemcheck",
+    "version": "5.0.0",
+    "keywords": ["jtl", "jtl-shop"],
+    "homepage": "https://www.jtl-software.de/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JTL-Software GmbH",
+            "email": "info@jtl-software.de",
+            "homepage": "https://www.jtl-software.de/"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "smarty/smarty": "^4.0"
+    },
+    "autoload": {
+        "psr-4": { "Systemcheck\\": "src" }
+    }
+}

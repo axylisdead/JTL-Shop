@@ -1,0 +1,59 @@
+@import '../../base/sass/functions';
+@import 'variables';
+@import '../../base/sass/_base_crit.scss';
+
+#header-top-bar, header {
+  a {
+    text-decoration: none;
+    color: $header-color;
+    &:hover:not(.dropdown-item):not(.btn) {
+      color: $primary;
+    }
+  }
+  .nav-mobile-heading {
+    background-color: $header-bg-color;
+  }
+}
+
+header {
+  .form-control, .form-control:focus  {
+    background-color: $header-bg-color;
+    color: $header-color;
+  }
+}
+
+.form-control {
+  font-family: $input-font-family;
+}
+
+/* spacing end */
+
+.pagination {
+  margin: 0;
+  align-items: center;
+}
+.productlist-page-nav, .productlist-page-nav-header-m {
+  align-items: center;
+}
+.productlist-page-nav .productlist-item-info {
+  margin-left: auto;
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  color: $gray-lighter;
+}
+
+.productlist-filter-headline {
+  border-bottom: $border-width solid $border-color;
+}
+
+/* image loading indicator */
+
+.lazyloading {
+  color: transparent;
+  width: auto;
+  height: auto;
+  max-width: 40px;
+  max-height: 40px;
+}

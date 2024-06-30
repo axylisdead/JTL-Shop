@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Profiler"
+msgstr "Profiler"
+
+msgid "profilerDesc"
+msgstr "Here is where you can find profiling data for sql queries."
+
+msgid "pluginprofilerURL"
+msgstr "https://jtl-url.de/fr8i2"
+
+msgid "successEntryDelete"
+msgstr "Entry deleted successfully."
+
+msgid "errorEntryDelete"
+msgstr "Could not delete entry."
+
+msgid "successEntriesDelete"
+msgstr "Entries deleted successfully."
+
+msgid "errorEntriesDelete"
+msgstr "Could not delete entries."
+
+msgid "Total queries"
+msgstr "Total queries"
+
+msgid "Tables"
+msgstr "Tables"
+
+msgid "Statement"
+msgstr "Statement"
+
+msgid "Runtime"
+msgstr "Runtime"
+
+msgid "Backtrace"
+msgstr "Backtrace"
+
+msgid "Error message"
+msgstr "Error message"

@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "labelShippingClassWizard"
+msgstr "Shipping class wizard"
+
+msgid "errorMaxClassCountExceeded"
+msgstr "The Shipping classes wizard only supports a maximum of %d shipping classes!"
+
+msgid "warningManyCombinations"
+msgstr "Please wait a moment while the combinations are being generated as up to %d combinations can be created with %d shipping classes."
+
+msgid "errorSavingWizardDefinition"
+msgstr "Could not save shipping class definition. %s"
+
+msgid "warningNotSavedYet"
+msgstr "Please note that the assistant will overwrite any changes you have made manually."
+
+msgid "New shipping method"
+msgstr "New shipping method"
+
+msgid "wizardShowingCombinations"
+msgstr "The shipping method should ..."
+
+msgid "wizardShowingCombinationsAllways"
+msgstr "always be displayed"
+
+msgid "wizardShowingCombinationsShow"
+msgstr "be displayed if ..."
+
+msgid "wizardShowingCombinationsHide"
+msgstr "be hidden if ..."
+
+msgid "Condition"
+msgstr "Condition %d"
+
+msgid "wizardCombinationsConditionAnd"
+msgstr "...all conditions are met"
+
+msgid "wizardCombinationsConditionOr"
+msgstr "...at least one condition is met"
+
+msgid "wizardCombinationsConditionXOr"
+msgstr "...exactly one condition is met"
+
+msgid "wizardCombinationsConditionInclusive"
+msgstr "Allow other shipping classes in the basket"
+
+msgid "wizardCombinationsConditionExclusive"
+msgstr "Do NOT allow other shipping classes in the basket"
+
+msgid "addShippincCass"
+msgstr "Add shipping class"
+
+msgid "addCondition"
+msgstr "Add condition"
+
+msgid "PartsLogicAnd"
+msgstr "The basket contains at least one of the following shipping classes:"
+
+msgid "PartsLogicOr"
+msgstr "The basket contains all of the following shipping classes:"
+
+msgid "wizard_combinations_showing_tooltip"
+msgstr "Specify whether the shipping method should always be displayed, no matter which shipping classes are in the basket, or whether you want to define display rules based on shipping classes."
+
+msgid "wizard_combinations_condition_tooltip"
+msgstr "Select how the conditions that you will specify in the next step will affect each other."
+
+msgid "wizard_combinations_exclusive_tooltip"
+msgstr "Specify whether the assistant also creates combinations with your other shipping classes that you have not defined via the conditions."
+
+msgid "https://jtl-url.de/dlkpz"
+msgstr "https://jtl-url.de/1camo"

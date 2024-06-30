@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="JTL-Shop-Systemcheck">
+		<meta name="author" content="JTL-Software GmbH">
+		<link rel="shortcut icon" href="favicon.ico" />
+
+		<title>JTL-Shop-Systemcheck</title>
+
+		<!-- Bootstrap core CSS -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" media="screen, projection">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" media="screen, projection">
+		<link href="layout/css/bootstrap.css" rel="stylesheet">
+		<link href="layout/css/systemcheck.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="container">
+			<a class="logo" id="logo-headline">
+				<img src="layout/images/JTL-beLogo.png" alt="JTL-Software GmbH" style="height:55px;margin-left:5px;">
+			</a>
+			<div class="navbar navbar-inverse" role="navigation" id="nav-headline">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="http://www.jtl-software.de/">JTL-Software GmbH</a></li>
+						<li><a href="https://guide.jtl-software.de/jtl/JTL-Shop">Wiki</a></li>
+						<li><a href="https://forum.jtl-software.de/">JTL-Supportforum</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		{% block main %}
+		{% endblock %}
+
+		<div class="container">
+			<div class="pull-right">
+				<img src="layout/images/JTL-Shop-Logo.svg" alt="JTL-Shop 4">
+			</div>
+		</div>
+
+		<script src="layout/js/jquery.js"></script>
+		<script src="layout/js/jquery.expander.js"></script>
+		<script src="layout/js/bootstrap.min.js"></script>
+		<script src="layout/js/init.js"></script>
+	</body>
+</html>

@@ -1,0 +1,1 @@
+<div id="{$id}" class="row btn-group top15"><div class="ppc-message {$pos} btn"></div></div>
