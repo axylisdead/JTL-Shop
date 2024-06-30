@@ -1,0 +1,705 @@
+<?php declare(strict_types=1);
+
+namespace JTL\Mail\Mail;
+
+use InvalidArgumentException;
+use JTL\Language\LanguageHelper;
+use JTL\Language\LanguageModel;
+use JTL\Mail\SendMailObjects\MailDataTableObject;
+use JTL\Mail\Template\TemplateFactory;
+use JTL\Mail\Template\TemplateInterface;
+use JTL\Session\Frontend;
+use JTL\Shop;
+use PHPMailer\PHPMailer\PHPMailer;
+use ReflectionClass;
+
+/**
+ * Class Mail
+ * @package JTL\Mail\Mail
+ */
+class Mail implements MailInterface
+{
+    /**
+     * @deprecated since 5.3.0 - this was a typo
+     */
+    public const LENTH_LIMIT = 987;
+
+    public const LENGTH_LIMIT = 987;
+
+    /**
+     * @var int
+     */
+    private int $customerGroupID = 0;
+
+    /**
+     * @var LanguageModel|null
+     */
+    private ?LanguageModel $language = null;
+
+    /**
+     * @var string
+     */
+    private string $fromMail;
+
+    /**
+     * @var string
+     */
+    private string $fromName;
+
+    /**
+     * @var ?string
+     */
+    private ?string $toMail = null;
+
+    /**
+     * @var string
+     */
+    private string $toName = '';
+
+    /**
+     * @var string|null
+     */
+    private ?string $replyToMail = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $replyToName = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $subject = null;
+
+    /**
+     * @var string
+     */
+    private string $bodyHTML = '';
+
+    /**
+     * @var string
+     */
+    private string $bodyText = '';
+
+    /**
+     * @var Attachment[]
+     */
+    private array $attachments = [];
+
+    /**
+     * @var Attachment[]
+     */
+    private array $pdfAttachments = [];
+
+    /**
+     * @var string
+     */
+    private string $error = '';
+
+    /**
+     * @var array
+     */
+    private array $copyRecipients = [];
+
+    /**
+     * @var TemplateInterface|null
+     */
+    private ?TemplateInterface $template = null;
+
+    /**
+     * @var mixed
+     */
+    private mixed $data = null;
+
+    /**
+     * @var array{mail: string, name: string}
+     */
+    private array $recipients = [];
+
+    /**
+     * @var int
+     */
+    private int $priority = 100;
+
+    /**
+     * Mail constructor.
+     */
+    public function __construct()
+    {
+        $this->initDefaults();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createFromTemplateID(string $id, $data = null, TemplateFactory $factory = null): MailInterface
+    {
+        $template = $this->getTemplateFromID($factory, $id);
+
+        return $this->createFromTemplate($template, $data);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createFromTemplate(TemplateInterface $template, $data = null, $language = null): MailInterface
+    {
+        $this->setData($data);
+        $this->setTemplate($template);
+        $this->setLanguage($language ?? $this->detectLanguage());
+        if ($this->customerGroupID === 0) {
+            $this->setCustomerGroupID(Frontend::getCustomer()->getGroupID());
+        }
+        $template->load($this->language->getId(), $this->customerGroupID);
+        $model = $template->getModel();
+        if ($model === null) {
+            throw new InvalidArgumentException('Cannot parse model for ' . $template->getID());
+        }
+        $names       = $model->getAttachmentNames($this->language->getId());
+        $attachments = $model->getAttachments($this->language->getId());
+        foreach (\array_combine($names, $attachments) as $name => $attachment) {
+            $this->addPdfFile($name, $attachment);
+        }
+        $this->setSubject($model->getSubject($this->language->getId()));
+        $this->setFromName($template->getFromName() ?? $this->fromName ?? '');
+        $this->setFromMail($template->getFromMail() ?? $this->fromMail ?? '');
+        $this->setCopyRecipients($template->getCopyTo() ?? $this->copyRecipients);
+        $this->setSubject($template->getSubject() ?? $this->subject ?? '');
+        $this->parseData();
+        $this->setReplyToMail($this->replyToMail ?? $this->fromMail);
+        $this->setReplyToName($this->replyToName ?? $this->replyToMail);
+
+        return $this;
+    }
+
+    /**
+     * some mail servers seem to have problems with very long lines - wordwrap() if necessary
+     *
+     * @param string $text
+     * @return string
+     */
+    private function wordwrap(string $text): string
+    {
+        $hasLongLines = false;
+        foreach (\preg_split('/((\r?\n)|(\r\n?))/', $text) as $line) {
+            if (\mb_strlen($line) > self::LENGTH_LIMIT) {
+                $hasLongLines = true;
+                break;
+            }
+        }
+
+        return $hasLongLines ? \wordwrap($text, 900) : $text;
+    }
+
+    /**
+     *
+     */
+    private function parseData(): void
+    {
+        if (!empty($this->data->NewsletterEmpfaenger->cEmail)) {
+            $this->toMail = $this->data->NewsletterEmpfaenger->cEmail;
+            $this->toName = $this->data->NewsletterEmpfaenger->cVorname . ' '
+                . $this->data->NewsletterEmpfaenger->cNachname;
+        } elseif (!empty($this->data->mailReceiver->cEmail)) {
+            $this->toMail = $this->data->mailReceiver->cEmail;
+            $this->toName = $this->data->mailReceiver->cVorname . ' ' . $this->data->mailReceiver->cNachname;
+        } elseif (isset($this->data->mail)) {
+            if (isset($this->data->mail->fromEmail)) {
+                $this->fromMail = $this->data->mail->fromEmail;
+            }
+            if (isset($this->data->mail->fromName)) {
+                $this->fromName = $this->data->mail->fromName;
+            }
+            if (isset($this->data->mail->toEmail)) {
+                $this->toMail = $this->data->mail->toEmail;
+            }
+            if (isset($this->data->mail->toName)) {
+                $this->toName = $this->data->mail->toName;
+            }
+            if (isset($this->data->mail->replyToEmail)) {
+                $this->replyToMail = $this->data->mail->replyToEmail;
+            }
+            if (isset($this->data->mail->replyToName)) {
+                $this->replyToName = $this->data->mail->replyToName;
+            }
+        } elseif (isset($this->data->tkunde->cMail)) {
+            $this->toMail = $this->data->tkunde->cMail;
+            $this->toName = $this->data->tkunde->cVorname . ' ' . $this->data->tkunde->cNachname;
+        }
+    }
+
+    /**
+     * @return LanguageModel
+     */
+    private function detectLanguage(): LanguageModel
+    {
+        if ($this->language !== null) {
+            return $this->language;
+        }
+        $allLanguages = LanguageHelper::getAllLanguages(1);
+        if (isset($this->data->tkunde->kSprache) && $this->data->tkunde->kSprache > 0) {
+            return $allLanguages[(int)$this->data->tkunde->kSprache];
+        }
+        if (isset($this->data->NewsletterEmpfaenger->kSprache) && $this->data->NewsletterEmpfaenger->kSprache > 0) {
+            return $allLanguages[(int)$this->data->NewsletterEmpfaenger->kSprache];
+        }
+        if (isset($_SESSION['currentLanguage']->kSprache)) {
+            return $_SESSION['currentLanguage'];
+        }
+
+        return isset($_SESSION['kSprache'])
+            ? $allLanguages[$_SESSION['kSprache']]
+            : LanguageHelper::getDefaultLanguage();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLanguage(): LanguageModel
+    {
+        return $this->language;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setLanguage(LanguageModel $language): MailInterface
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setData($data): MailInterface
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function initDefaults(): void
+    {
+        $config         = Shop::getSettingSection(\CONF_EMAILS);
+        $this->fromName = $config['email_master_absender_name'] ?? '';
+        $this->fromMail = $config['email_master_absender'] ?? '';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCustomerGroupID(): int
+    {
+        return $this->customerGroupID;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCustomerGroupID(int $customerGroupID): MailInterface
+    {
+        $this->customerGroupID = $customerGroupID;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFromMail(): string
+    {
+        return $this->fromMail;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFromMail($fromMail): MailInterface
+    {
+        $this->fromMail = $fromMail;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFromName(): string
+    {
+        return $this->fromName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFromName($fromName): MailInterface
+    {
+        $this->fromName = $fromName;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getToMail(): string
+    {
+        return $this->toMail;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setToMail($toMail): MailInterface
+    {
+        $this->toMail = $toMail;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addRecipient(string $mail, string $name = ''): void
+    {
+        $this->recipients[] = ['mail' => $mail, 'name' => $name];
+    }
+
+    /**
+     * @param array{mail: string, name: string} $recipients
+     * @return void
+     */
+    public function setRecipients(array $recipients): void
+    {
+        $this->recipients = $recipients;
+    }
+
+    /**
+     * @return array{mail: string, name: string}
+     */
+    public function getRecipients(): array
+    {
+        return \array_merge([['mail' => $this->getToMail(), 'name' => $this->getToName()]], $this->recipients);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getToName(): string
+    {
+        return $this->toName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setToName($toName): MailInterface
+    {
+        $this->toName = $toName;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getReplyToMail(): string
+    {
+        return $this->replyToMail ?? $this->fromMail;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setReplyToMail($replyToMail): MailInterface
+    {
+        $this->replyToMail = $replyToMail;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getReplyToName(): string
+    {
+        return $this->replyToName ?? $this->getReplyToMail();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setReplyToName(string $replyToName): MailInterface
+    {
+        $this->replyToName = $replyToName;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSubject($subject): MailInterface
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getBodyHTML(): string
+    {
+        return $this->bodyHTML;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setBodyHTML(string $bodyHTML): MailInterface
+    {
+        $this->bodyHTML = $this->wordwrap($bodyHTML);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getBodyText(): string
+    {
+        return $this->bodyText;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setBodyText($bodyText): MailInterface
+    {
+        $this->bodyText = $this->wordwrap($bodyText);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttachments(): array
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttachments(array $attachments): MailInterface
+    {
+        $this->attachments = $attachments;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAttachment(Attachment $attachment): void
+    {
+        $this->attachments[] = $attachment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPdfAttachments(): array
+    {
+        return $this->pdfAttachments;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPdfAttachments(array $pdfAttachments): MailInterface
+    {
+        $this->pdfAttachments = $pdfAttachments;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addPdfAttachment(Attachment $pdf): void
+    {
+        $this->pdfAttachments[] = $pdf;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addPdfFile(string $name, string $file): void
+    {
+        $attachment = new Attachment();
+        $attachment->setName($name);
+        $attachment->setFileName($file);
+        $attachment->setMime('application/pdf');
+        $attachment->setEncoding(PHPMailer::ENCODING_BASE64);
+        $this->pdfAttachments[] = $attachment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getError(): string
+    {
+        return $this->error;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setError(string $error): MailInterface
+    {
+        $this->error = $error;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCopyRecipients(): array
+    {
+        return $this->copyRecipients;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCopyRecipients(array $copyRecipients): MailInterface
+    {
+        $this->copyRecipients = $copyRecipients;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addCopyRecipient(string $copyRecipient): void
+    {
+        $this->copyRecipients[] = $copyRecipient;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTemplate(): ?TemplateInterface
+    {
+        return $this->template;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTemplate(?TemplateInterface $template): MailInterface
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     * @return void
+     */
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @return object
+     */
+    public function toObject(): object
+    {
+        $reflect    = new ReflectionClass($this);
+        $properties = $reflect->getProperties();
+        $toArray    = [];
+        foreach ($properties as $property) {
+            $propertyName           = $property->getName();
+            $toArray[$propertyName] = $property->getValue($this);
+        }
+
+        return (object)$toArray;
+    }
+
+    /**
+     * Will accept data from an object.
+     * @param MailDataTableObject $object
+     * @return $this
+     * @throws \Exception
+     */
+    public function hydrateWithObject(MailDataTableObject $object): self
+    {
+        $attributes = \get_object_vars($this);
+        foreach ($attributes as $attribute => $value) {
+            $setMethod = 'set' . \ucfirst($attribute);
+            $getMethod = 'get' . \ucfirst($attribute);
+            if (\method_exists($this, $setMethod)
+                && \method_exists($object, $getMethod)
+                && $object->{$getMethod}() !== null) {
+                $this->$setMethod($object->{$getMethod}());
+            }
+        }
+        $this->setLanguage(Shop::Lang()->getLanguageByID($object->getLanguageId()));
+        $this->template = $this->getTemplateFromID(null, $object->getTemplateId());
+
+        return $this;
+    }
+
+    /**
+     * @param TemplateFactory|null $factory
+     * @param string               $id
+     * @return TemplateInterface
+     */
+    protected function getTemplateFromID(?TemplateFactory $factory, string $id): TemplateInterface
+    {
+        $factory  = $factory ?? new TemplateFactory(Shop::Container()->getDB());
+        $template = $factory->getTemplate($id);
+        if ($template === null) {
+            throw new InvalidArgumentException('Cannot find template ' . $id);
+        }
+
+        return $template;
+    }
+}

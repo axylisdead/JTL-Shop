@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Trennzeichen"
+msgstr "Number formats"
+
+msgid "trennzeichenURL"
+msgstr "https://jtl-url.de/p7xo3"
+
+msgid "trennzeichenDesc"
+msgstr " "
+
+msgid "countDecimals"
+msgstr "Number of decimal places"
+
+msgid "thousandDivider"
+msgstr "Thousands separator"
+
+msgid "decimalsDivider"
+msgstr "Decimal separator"

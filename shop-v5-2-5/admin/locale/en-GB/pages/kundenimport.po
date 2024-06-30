@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "customerImport"
+msgstr "Customer import"
+
+msgid "customerImportURL"
+msgstr "https://jtl-url.de/1lb7g"
+
+msgid "customerImportDesc"
+msgstr "Here you can import customer data (including passwords) from other online shop systems. This means that your customers do not have to register for this online shop again. <strong>Important: When you change the server, it is paramount that you adopt the Blowfish key (see /includes/config.JTL-Shop.ini.php) for the new system!</strong>"
+
+msgid "csvFile"
+msgstr "CSV file with customer data"
+
+msgid "customerGroup"
+msgstr "Assign this customer group to customers"
+
+msgid "language"
+msgstr "Assign this language to customers"
+
+msgid "errorInvalidEmail"
+msgstr "Invalid email address: (%s)! Data set was skipped."
+
+msgid "errorNoPassword"
+msgstr "No password. Data set was skipped. (Possibly unregistered customer of JTL-Shop)"
+
+msgid "errorNoSurname"
+msgstr "No last name. Data set was skipped."
+
+msgid "errorEmailDuplicate"
+msgstr "A customer with this email address already exists: %s. Data set was skipped."
+
+msgid "errorImportRecord"
+msgstr "The row could not be imported. Please have a look at the log file (Root/logs/) and correct the respective errors in the CSV file."
+
+msgid "successImportCustomerCsv"
+msgstr "Successfully imported customer datasets: %s"
+
+msgid "errorFormatNotFound"
+msgstr "Format not recognised."
+
+msgid "notifyCustomersInfo"
+msgstr "Some recently imported customer accounts require a new password! "
+"Do you like to ask these customers via email now to reset their password?"
+
+msgid "notifyCustomersButton"
+msgstr "Yes, notify customers via email now"
+
+msgid "customersNotified"
+msgstr "Customers notified"
+
+msgid "customersNotifiedOK"
+msgstr "Notifications have been sent"

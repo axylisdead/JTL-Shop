@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Product Stream"
+msgstr "Product Stream"
+
+msgid "presentation"
+msgstr "View"
+
+msgid "presentationGallery"
+msgstr "Gallery"
+
+msgid "presentationList"
+msgstr "List"
+
+msgid "presentationSimpleSlider"
+msgstr "Simple slider with images"
+
+msgid "presentationSlider"
+msgstr "Slider with names and prices"
+
+msgid "presentationBoxSlider"
+msgstr "Single-product slider with name and price"
+
+msgid "itemFilter"
+msgstr "Item filter"
+
+msgid "maxProducts"
+msgstr "Max. products"
+
+msgid "maxProductsDesc"
+msgstr "Limits the number of products to..."
+
+msgid "productSource"
+msgstr "Product selection"
+
+msgid "productSourceFiltering"
+msgstr "Filtering"
+
+msgid "productSourceExplicit"
+msgstr "Explicit selection"
+
+msgid "searchFilters"
+msgstr "Search filters"
+
+msgid "displayCountDesc"
+msgstr "Responsive display: Here you can define, how many products are to be displayed simultaneously in the slider "
+"depending on the user devices viewport-size (SM: small, MD: medium, LG: large, XL: extra large)"
+
+msgid "displayCountSM"
+msgstr "Number on SM"
+
+msgid "displayCountMD"
+msgstr "Number on MD"
+
+msgid "displayCountLG"
+msgstr "Number on LG"
+
+msgid "displayCountXL"
+msgstr "Number on XL"

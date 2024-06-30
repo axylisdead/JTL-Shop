@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "redirect"
+msgstr "Weiterleitungen"
+
+msgid "redirectDesc"
+msgstr "Legen Sie Weiterleitungen für verwaiste URLs an, deren Zielseiten unter einem neuen Pfad erreichbar sind. JTL-Shop kann sich automatisch alle nicht gefundenen URLs, die aufgerufen wurden, merken<a href=\"./config?einstellungen_suchen=1&cSuche=1566\"> (zur Einstellung)</a>, und listet diese hier auf. Legen Sie nur dann eine Weiterleitung an, wenn der Inhalt der alten Seite umgezogen wurde und nun unter einem neuen Pfad abrufbar ist."
+
+msgid "redirectURL"
+msgstr "https://jtl-url.de/961as"
+
+msgid "redirectDelUnassigned"
+msgstr "Alle ohne Weiterleitung löschen"
+
+msgid "redirectNew"
+msgstr "Neue Weiterleitung"
+
+msgid "redirectFrom"
+msgstr "Quell-URL"
+
+msgid "redirectTo"
+msgstr "Ziel-URL"
+
+msgid "redirectReferer"
+msgstr "Ursprung"
+
+msgid "redirectRefererDirect"
+msgstr "Direkteinstieg"
+
+msgid "redirectCsvImport"
+msgstr "CSV-Import"
+
+msgid "errorURLNotReachable"
+msgstr "Änderungen konnten nicht gespeichert werden, da die weiterzuleitende URL %s nicht erreichbar ist."
+
+msgid "successRedirectSave"
+msgstr "Weiterleitung wurde erfolgreich gespeichert."
+
+msgid "errorImport"
+msgstr "Der Import konnte nicht durchgeführt werden. Bitte prüfen Sie die CSV-Datei."
+
+msgid "successImport"
+msgstr "Import wurde erfolgreich durchgeführt."
+
+msgid "create/edit"
+msgstr "Erstellen/Bearbeiten"
+
+msgid "Parameter handling"
+msgstr "Parameterbehandlung"
+
+msgid "exact match"
+msgstr "Exakter Match"
+
+msgid "ignore GET parameters"
+msgstr "GET-Parameter ignorieren"
+
+msgid "append GET parameters"
+msgstr "GET-Parameter übernehmen"
+
+msgid "parameterHandlingDesc"
+msgstr "Hier legen Sie fest, wie GET-Paramter in der Quell- und Ziel-URL behandelt werden sollen. Eine ausführliche Beschreibung dieser Einstellung finden Sie im zugehörigen Beitrag im JTL-Guide, den Sie über das Wegweiser-Symbol oben rechts auf dieser Seite erreichen."

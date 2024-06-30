@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "branding"
+msgstr "Wasserzeichen"
+
+msgid "brandingDesc"
+msgstr "Hier können Sie Wasserzeichen für Bilder in verschiedenen Kategorien einstellen. <strong>Achtung</strong>: Alle betroffenen Bildercaches werden beim Ändern dieser Einstellung invalidiert und sollten im Menü unter \"Fehlerbehebung -> Bilder\" neu generiert werden!"
+
+msgid "brandingUrl"
+msgstr "https://jtl-url.de/y8nkh"
+
+msgid "brandingPictureKat"
+msgstr "Bildkategorie"
+
+msgid "brandingActive"
+msgstr "Wasserzeichenfunktion aktivieren"
+
+msgid "brandingActiveDesc"
+msgstr "Hier legen Sie fest, ob bei Bildern der ausgewählten Bildkategorie ein Wasserzeichen angezeigt werden soll."
+
+msgid "brandingPositionDesc"
+msgstr "Hier legen Sie fest, an welcher Stelle im Bild das Wasserzeichen angezeigt werden soll."
+
+msgid "brandingTransparencyDesc"
+msgstr "Hier legen Sie die Transparenz des Wasserzeichens in Prozent fest. Wir empfehlen einen Wert von 50."
+
+msgid "brandingSizeDesc"
+msgstr "Hier geben Sie die Größe des Wasserzeichens in Prozent im Verhältnis zum Gesamtbild ein. Wir empfehlen einen Wert von 30. 0 skaliert das Wasserzeichen gar nicht und fügt es in der Original-Bildgröße ein."
+
+msgid "brandingFileName"
+msgstr "Datei für Wasserzeichen"
+
+msgid "brandingFileNameDesc"
+msgstr "Hier können Sie eine Bilddatei für das Wasserzeichen hinterlegen. Wir empfehlen eine PNG-Datei mit transparentem Hintergrund."
+
+# branding types (tbranding)
+msgid "product"
+msgstr "Artikel"
+
+# branding types (tbranding)
+msgid "category"
+msgstr "Kategorien"
+
+# branding types (tbranding)
+msgid "variation"
+msgstr "Variationen"
+
+# branding types (tbranding)
+msgid "characteristic"
+msgstr "Merkmale"
+
+# branding types (tbranding)
+msgid "characteristicvalue"
+msgstr "Merkmalwerte"
+
+# branding types (tbranding)
+msgid "manufacturer"
+msgstr "Hersteller"
+
+#placeholder: name of image category
+msgid "headingEditBrandingForProduct"
+msgstr "Wasserzeichen für %s bearbeiten"
+
+msgid "Not a valid image file."
+msgstr "Ungültige Bilddatei."
+
+msgid "Could not move uploaded file to %s."
+msgstr "Konnte Datei nicht nach %s bewegen."
+
+msgid "Enable for these image sizes"
+msgstr "Für diese Bildgrößen aktivieren"

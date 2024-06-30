@@ -1,0 +1,41 @@
+{
+    "name": "foxy/foxy",
+    "description": "Fast, reliable, and secure NPM/Yarn bridge for Composer",
+    "keywords": ["npm", "yarn", "composer", "bridge", "dependency manager", "package", "asset", "nodejs"],
+    "homepage": "https://github.com/fxpio/foxy",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "François Pluchino",
+            "email": "francois.pluchino@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "composer-plugin-api": "^1.1|^2.0"
+    },
+    "require-dev": {
+        "composer/composer": "^1.5.0|^2.0.0@dev"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Foxy\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "class": "Foxy\\Foxy",
+        "branch-alias": {
+            "dev-master": "1.1-dev"
+        }
+    }
+}

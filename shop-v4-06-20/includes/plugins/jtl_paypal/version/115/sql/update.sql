@@ -1,0 +1,2 @@
+DELETE FROM tzahlungslog WHERE cModulId LIKE 'kPlugin\_%\_paypalfinance';
+DELETE tversandartzahlungsart, tzahlungsartsprache, tzahlungsart FROM tzahlungsart LEFT JOIN tzahlungsartsprache ON tzahlungsart.kZahlungsart = tzahlungsartsprache.kZahlungsart LEFT JOIN tversandartzahlungsart ON tzahlungsart.kZahlungsart = tversandartzahlungsart.kZahlungsart WHERE tzahlungsart.cModulId LIKE 'kPlugin\_%\_paypalfinance';

@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "labelShippingClassWizard"
+msgstr "Versandklassen-Assistent"
+
+msgid "errorMaxClassCountExceeded"
+msgstr "Der Versandklassen-Assistent unterstützt max. %d Versandklassen!"
+
+msgid "errorSavingWizardDefinition"
+msgstr "Die Versandklassendefinition konnte nicht gespeichert werden. %s"
+
+msgid "warningNotSavedYet"
+msgstr "Bitte beachten Sie, dass der Assistent alle Änderungen überschreibt, die Sie selbst manuell vorgenommen haben."
+
+msgid "warningManyCombinations"
+msgstr "Bitte haben Sie bei der Erstellung einen Moment Geduld, da bei %d Versandklassen bis zu %d Kombinationen entstehen können."
+
+msgid "New shipping method"
+msgstr "Neue Versandart"
+
+msgid "wizardShowingCombinations"
+msgstr "Die Versandart soll ..."
+
+msgid "wizardShowingCombinationsAllways"
+msgstr "immer angezeigt werden"
+
+msgid "wizardShowingCombinationsShow"
+msgstr "angezeigt werden, wenn ..."
+
+msgid "wizardShowingCombinationsHide"
+msgstr "ausgeblendet werden, wenn ..."
+
+msgid "Condition"
+msgstr "Bedingung %d"
+
+msgid "wizardCombinationsConditionAnd"
+msgstr "...alle Bedingungen erfüllt sind"
+
+msgid "wizardCombinationsConditionOr"
+msgstr "...mindestens eine Bedingung erfüllt ist"
+
+msgid "wizardCombinationsConditionXOr"
+msgstr "...genau eine Bedingung erfüllt ist"
+
+msgid "wizardCombinationsConditionInclusive"
+msgstr "Andere Versandklassen dürfen im Warenkorb sein"
+
+msgid "wizardCombinationsConditionExclusive"
+msgstr "Andere Versandklassen dürfen NICHT im Warenkorb sein"
+
+msgid "addShippincCass"
+msgstr "Versandklasse hinzufügen"
+
+msgid "addCondition"
+msgstr "Bedingung hinzufügen"
+
+msgid "PartsLogicAnd"
+msgstr "Der Warenkorb beinhaltet mindestens eine der folgenden Versandklassen:"
+
+msgid "PartsLogicOr"
+msgstr "Der Warenkorb beinhaltet alle folgenden Versandklassen:"
+
+msgid "wizard_combinations_showing_tooltip"
+msgstr "Hier legen Sie fest, ob die Versandart angezeigt werden soll, egal welche Versandklassen sich im Warenkorb befinden, oder ob Sie Anzeigeregeln auf Basis von Versandklassen definieren möchten."
+
+msgid "wizard_combinations_condition_tooltip"
+msgstr "Hier wählen Sie, wie sich die Bedingungen, die Sie im nächsten Schritt definieren, aufeinander auswirken."
+
+msgid "wizard_combinations_exclusive_tooltip"
+msgstr "Hier legen Sie fest, ob der Assistent auch Kombinationen mit Versandklassen erstellt, die Sie nicht über die Bedingungen definiert haben."
+
+msgid "https://jtl-url.de/dlkpz"
+msgstr "https://jtl-url.de/mgbie"

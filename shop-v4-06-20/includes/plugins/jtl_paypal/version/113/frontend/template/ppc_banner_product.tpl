@@ -1,0 +1,1 @@
+<div id="{$id}" class="basket-form-inline top15"><div class="ppc-message {$pos} col col-12"></div></div>

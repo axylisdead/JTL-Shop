@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "pageTitle"
+msgstr "API keys"
+
+msgid "pageDesc"
+msgstr "Here you can manage API keys for the REST API."
+
+msgid "modelHeader"
+msgstr "API keys"
+
+msgid "key"
+msgstr "API key"
+
+msgid "childHeading"
+msgstr "Localisation"
+
+msgid "generalHeading"
+msgstr "General"
+
+msgid "permissionsAllowMethodNone"
+msgstr "Allow no methods"
+
+msgid "permissionsAllowMethodGet"
+msgstr "Allow the GET method"
+
+msgid "permissionsAllowMethodPost"
+msgstr "Allow the POST method"
+
+msgid "permissionsAllowMethodPut"
+msgstr "Allow the PUT method"
+
+msgid "permissionsAllowMethodDelete"
+msgstr "Allow the DELETE method"
+
+msgid "permissionsAllowMethodAll"
+msgstr "Allow all methods"
